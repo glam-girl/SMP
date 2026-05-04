@@ -1,372 +1,791 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chhatrapati Shivaji Maharaj: The 99-Page Master Chronicle</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+import React, { useState } from 'react';
+import { 
+  History, 
+  ChevronRight, 
+  ChevronLeft, 
+  Shield, 
+  Crown,
+  Anchor,
+  Sword,
+  ScrollText,
+  Users,
+  Target,
+  Globe,
+  Waves,
+  Building2,
+  Zap,
+  Flame,
+  Scale,
+  Gem,
+  Tent
+} from 'lucide-react';
 
-        :root {
-            --saffron: #FF9933;
-            --deep-ink: #1a1410;
-            --paper: #fdf6e3;
-            --border-gold: #b8860b;
-        }
+const App = () => {
+  const [currentPage, setCurrentPage] = useState(0);
 
-        body {
-            background-color: #121212;
-            color: var(--deep-ink);
-            font-family: 'Libre Baskerville', serif;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        .book-frame {
-            width: 100%;
-            max-width: 1300px;
-            background: var(--paper);
-            min-height: 100vh;
-            box-shadow: 0 0 80px rgba(0,0,0,1);
-            border-left: 20px solid #2d241e;
-            border-right: 20px solid #2d241e;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        .header {
-            background: var(--deep-ink);
-            color: var(--saffron);
-            padding: 2.5rem;
-            text-align: center;
-            font-family: 'Cinzel', serif;
-            border-bottom: 6px double var(--border-gold);
-            letter-spacing: 3px;
-        }
-
-        .page-body {
-            padding: 4rem 7rem;
-            flex-grow: 1;
-            line-height: 2.3;
-            font-size: 1.25rem;
-            text-align: justify;
-        }
-
-        .visual-reference-lab {
-            width: 100%;
-            background: #f0e6d2;
-            border: 2px dashed var(--border-gold);
-            margin: 3.5rem 0;
-            padding: 2.5rem;
-            text-align: center;
-            border-radius: 8px;
-        }
-
-        .image-link {
-            display: inline-block;
-            margin-top: 1.5rem;
-            color: #8b4513;
-            font-weight: bold;
-            text-decoration: underline;
-            font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .image-link:hover {
-            color: var(--saffron);
-            transform: scale(1.05);
-        }
-
-        .dropcap {
-            float: left;
-            font-family: 'Cinzel', serif;
-            font-size: 7.5rem;
-            line-height: 6rem;
-            padding-top: 1rem;
-            padding-right: 1.5rem;
-            color: var(--saffron);
-            text-shadow: 4px 4px 0px rgba(0,0,0,0.05);
-        }
-
-        .source-footer {
-            background: rgba(184, 134, 11, 0.08);
-            padding: 3rem;
-            margin-top: 5rem;
-            border-top: 3px solid var(--border-gold);
-            font-size: 1.1rem;
-            font-style: italic;
-        }
-
-        .nav-controls {
-            position: sticky;
-            bottom: 0;
-            background: var(--deep-ink);
-            padding: 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
-            z-index: 100;
-            border-top: 2px solid var(--border-gold);
-        }
-
-        .btn {
-            background: var(--saffron);
-            color: var(--deep-ink);
-            padding: 0.8rem 3rem;
-            font-weight: bold;
-            font-family: 'Cinzel', serif;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 0 #b36b24;
-        }
-
-        .btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #b36b24;
-            filter: brightness(1.1);
-        }
-
-        .btn:disabled {
-            background: #444;
-            color: #888;
-            box-shadow: none;
-            cursor: not-allowed;
-        }
-
-        h1 {
-            font-family: 'Cinzel', serif;
-            font-size: 3.2rem;
-            color: #3d2b1f;
-            margin-bottom: 3rem;
-            text-align: center;
-            border-bottom: 3px solid var(--saffron);
-            padding-bottom: 1.5rem;
-        }
-
-        h2 {
-            font-family: 'Cinzel', serif;
-            font-size: 2.1rem;
-            color: #7a5a0d;
-            margin-top: 4rem;
-            margin-bottom: 1.8rem;
-            border-left: 6px solid var(--saffron);
-            padding-left: 1.5rem;
-        }
-
-        p {
-            margin-bottom: 2.5rem;
-        }
-
-        @media (max-width: 1024px) {
-            .page-body { padding: 3rem 4rem; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="book-frame">
-    <div class="header">
-        CHHATRAPATI SHIVAJI MAHARAJ: THE COMPLETE AUTHENTIC BIOGRAPHY (1630 - 1680)
-    </div>
-
-    <div id="page-content" class="page-body">
-        <!-- High-Density Dynamic Content Injected Here -->
-    </div>
-
-    <div class="nav-controls">
-        <button class="btn" id="prevBtn" onclick="changePage(-1)">← PREVIOUS</button>
-        <div id="page-indicator" class="font-bold text-2xl">VOLUME 1 / 99</div>
-        <button class="btn" id="nextBtn" onclick="changePage(1)">NEXT →</button>
-    </div>
-</div>
-
-<script>
-    // Chronological High-Density Database (1630 - 1680)
-    const chapterData = [
-        { 
-            year: 1630, 
-            title: "The Shivneri Genesis: Foundations of Sovereignty", 
-            query: "Shivneri+Fort+Historical+Artifacts", 
-            topic: "Birth and the Deccan Chaos",
-            analysis: "The mid-17th century Deccan was a landscape of structural collapse. The birth of Shivaji at Shivneri was not merely a royal arrival but a response to the vacuum left by the decaying Nizamshahi. Jijabai, his mother, curated an environment of tactical resilience and Vedic ethics, ensuring the young prince understood the land before the crown." 
-        },
-        { 
-            year: 1642, 
-            title: "The Pune Awakening and Maval Integration", 
-            query: "Lal+Mahal+Pune+Restoration+Plan", 
-            topic: "Education and Local Loyalty",
-            analysis: "The restoration of Pune from a wasteland to a thriving administrative hub was Shivaji's first lesson in civil engineering. By recruiting the Maval peasants—hardy mountaineers—he built a grassroots army that was bonded not by mercenary wages but by a vision of 'Hindavi Swarajya'." 
-        },
-        { 
-            year: 1646, 
-            title: "Torna: The First Strike of the Lion", 
-            query: "Torna+Fort+Prachandagad+Architecture", 
-            topic: "The First Conquest",
-            analysis: "At 16, Shivaji seized Torna. This was a direct challenge to the Adil Shahi authority. The discovery of gold during the fort's renovation provided the capital needed for Rajgad, which would become the first capital of a free people." 
-        },
-        { 
-            year: 1656, 
-            title: "The Javali Conquest and Konkan Entry", 
-            query: "Javali+Valley+Mahabaleshwar+Forest", 
-            topic: "Territorial Expansion",
-            analysis: "Javali was controlled by the More family, loyalists to Bijapur. Shivaji's annexation of this dense forest region was a masterclass in mountain warfare. It opened the door to the Konkan coast and initiated the birth of the Maratha Navy." 
-        },
-        { 
-            year: 1659, 
-            title: "Pratapgad: The Death of a Giant", 
-            query: "Afzal+Khan+Sword+Pratapgad+Museum", 
-            topic: "Defeating Afzal Khan",
-            analysis: "The encounter with Afzal Khan was the defining moment of Maratha survival. Using the 'Wagh Nakha', Shivaji turned an assassination attempt into a revolutionary victory, proving that intelligence and terrain could defeat a numerically superior Mughal-style army." 
-        },
-        { 
-            year: 1660, 
-            title: "The Panhala Siege and Pavan Khind", 
-            query: "Pavan+Khind+Battle+Site+Historical", 
-            topic: "Sacrifice and Survival",
-            analysis: "Trapped at Panhala by Siddi Jauhar, Shivaji executed a daring rainy-night escape. Baji Prabhu Deshpande's last stand at Pavan Khind ensured the Chhatrapati's safety, a testimony to the supreme loyalty he inspired." 
-        },
-        { 
-            year: 1663, 
-            title: "The Night Raid on Shaista Khan", 
-            query: "Lal+Mahal+Pune+Shaista+Khan+Escape", 
-            topic: "Psychological Warfare",
-            analysis: "In a move of unparalleled audacity, Shivaji entered Pune under the cover of a wedding procession and raided Shaista Khan's harem. The loss of the Khan's fingers and his son's life shattered the myth of Mughal invincibility in the Deccan." 
-        },
-        { 
-            year: 1664, 
-            title: "The First Sack of Surat", 
-            query: "Old+Surat+Port+17th+Century", 
-            topic: "Economic Strategy",
-            analysis: "Shivaji recognized that Swarajya needed a treasury to fight the Mughals. By sacking Surat—the richest Mughal port—he financed his naval shipyards while strictly forbidding the harassment of the poor or religious sites." 
-        },
-        { 
-            year: 1665, 
-            title: "The Treaty of Purandar", 
-            query: "Treaty+of+Purandar+Historical+Map", 
-            topic: "Diplomatic Tactical Retreat",
-            analysis: "Faced with Mirza Raja Jai Singh's massive scorched-earth campaign, Shivaji chose survival over pride. He surrendered 23 forts but used the treaty to gain a diplomatic foothold in the Mughal court, setting the stage for his Agra journey." 
-        },
-        { 
-            year: 1666, 
-            title: "The Agra Escape: Intelligence Apex", 
-            query: "Agra+Fort+Shivaji+Maharaj+Escape", 
-            topic: "Global Intelligence Feat",
-            analysis: "The escape from Aurangzeb's house arrest in Agra using fruit baskets remains the greatest intelligence operation of the 17th century. It demonstrated Shivaji's vast network of spies and his ability to outmaneuver the Mughal Empire's central security." 
-        },
-        { 
-            year: 1670, 
-            title: "The Reconquest of the 23 Forts", 
-            query: "Sinhagad+Fort+Battle+History", 
-            topic: "Resurgence of Swarajya",
-            analysis: "Following the Agra escape, Shivaji systematically retook the forts lost at Purandar. The sacrifice of Tanaji Malusare at Sinhagad became the spiritual fuel for the total independence movement." 
-        },
-        { 
-            year: 1674, 
-            title: "The Grand Coronation at Raigad", 
-            query: "Raigad+Fort+Throne+Reconstruction", 
-            topic: "Founding the Chhatrapati Title",
-            analysis: "The Rajyabhishek was a formal rejection of Islamic Sultanate suzerainty. Shivaji became a sovereign king, establishing a Sanskrit-based administration and a legal code that prioritized the 'Ryot' above all else." 
-        },
-        { 
-            year: 1677, 
-            title: "Dakshin Digvijay: The Great Southern Quest", 
-            query: "Gingee+Fort+Architecture+Maratha", 
-            topic: "Empire Extension",
-            analysis: "The final years saw Shivaji marching deep into South India, capturing Gingee and Vellore. This created a strategic 'second base' for the Maratha state that would eventually save it during the 27-year war against Aurangzeb after Shivaji's death." 
-        },
-        { 
-            year: 1680, 
-            title: "The Final Legacy at Raigad", 
-            query: "Shivaji+Maharaj+Samadhi+Raigad", 
-            topic: "The Immortal Spirit",
-            analysis: "Shivaji Maharaj's passing in 1680 was not the end of an era, but the birth of a nation. He left behind 300 forts, a professional navy, and a decentralized administration that resisted the full might of the Mughal Empire for decades to come." 
-        }
-    ];
-
-    const pages = [];
-
-    // Generator function for extreme density (2000 words simulated through complex structural analysis)
-    for (let i = 1; i <= 99; i++) {
-        let core = chapterData[(i-1) % chapterData.length];
-        
-        pages.push({
-            vol: i,
-            title: `${core.title} - Analytical Part ${Math.ceil(i/chapterData.length)}`,
-            query: core.query,
-            content: `
-                <span class="dropcap">${core.title.charAt(0)}</span>${core.analysis} 
-                
-                <h2>I. Strategic and Military Doctrine</h2>
-                This phase of the chronicle focuses on the structural implementation of 'Ganimi Kawa' or Guerrilla tactics. Unlike the contemporary European armies that relied on slow, heavy artillery trains, the Maratha forces under the Chhatrapati utilized the topography of the Sahyadris as a primary weapon. Every mountain pass was analyzed for ambush potential. The infantry, known as the 'Mavales', were trained in rapid mountain ascent, allowing them to capture forts under the cover of darkness or extreme weather conditions. This volume provides a 400-word tactical breakdown of the specific cavalry maneuvers used in the field during this period.
-
-                <h2>II. Administrative and Revenue Reform</h2>
-                Shivaji Maharaj's governance was fundamentally anti-feudal. He recognized that the 'Vatandar' (hereditary landlord) system was the primary source of peasant exploitation. By introducing the 'Ryotwari' system, the state established a direct tax relationship with the farmer. This volume details the 'Adnyapatra'—the royal edict on statecraft—which explicitly forbade the military from seizing grain or assets from the common people. The revenue was calculated based on the quality of the land, with a 33% standard that dropped to 0% during famines, funded by the state's central treasury.
-
-                <h2>III. Naval Sovereignty and Maritime Engineering</h2>
-                A revolutionary aspect of this era was the realization that "He who rules the sea, rules the land." Shivaji Maharaj is rightfully called the 'Father of the Indian Navy'. During this volume's timeframe, the construction of sea-fortresses like Sindhudurg reached its peak. The engineering involved pouring thousands of tons of molten lead into the foundations of the rocky islands to withstand the monsoon swells. The Maratha navy, composed of 'Galbats' and 'Gurabs', was specifically designed for the shallow coastal waters of the Konkan, making it impossible for the larger British and Portuguese frigates to pursue them into the creeks.
-
-                <h2>IV. Socio-Cultural Integration and Secularism</h2>
-                The ethical framework of Swarajya was deeply inclusive. Historical records from the 'Sabhasad Bakhar' show that the Chhatrapati's personal bodyguards and naval commanders often included high-ranking Muslims, such as Ibrahim Khan and Daulat Khan. The protection of women, regardless of their background, was a non-negotiable law. This volume explores the specific legal cases where even high-ranking Maratha officials were severely punished for violating the dignity of civilians, establishing a rule of law that was centuries ahead of its time.
-
-                <h2>V. Legacy and Geopolitical Synthesis</h2>
-                Concluding this comprehensive analysis, we see that the Maratha state was not a temporary rebellion but a permanent institutional shift. By the year ${1630 + i}, the foundations of a professional civil service had been laid. The decentralized nature of this administration allowed the state to survive even when its leaders were in exile or under siege. This ${i}-page study proves that Shivaji Maharaj was a nation-builder whose vision of self-rule became the blueprint for the Indian independence movement three centuries later.
-            `,
-            source: "Sources: 'Shivaji the Great' (Dr. Balkrishna), 'Marathi Riyasat' (G.S. Sardesai), 'Sabhasad Bakhar'."
-        });
+  const timeline = [
+    { 
+      year: "1630", 
+      title: "The Advent", 
+      subtitle: "Birth at Shivneri & The Celestial Sign", 
+      stats: { forts: "0", army: "200 (Under Shahaji)", mainEnemy: "Deccan Famine" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra/Deccan Campaign" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Southern Deccan" },
+        { power: "Nizam Shahi", ruler: "Murtaza Nizam Shah II", region: "Ahmednagar (Declining)" }
+      ], 
+      content: ["On February 19, 1630, Shivaji was born in the hill fort of Shivneri. The Deccan was then in the throes of the 'Mahadurga' famine, a devastating event that shaped his early understanding of resource management and human suffering."], 
+      source: "Jedhe Shakavali." 
+    },
+    { 
+      year: "1631", 
+      title: "Shadow of Famine", 
+      subtitle: "Scorched Earth & Survival Tactics", 
+      stats: { forts: "0", army: "500 (Under Shahaji)", mainEnemy: "The Drought" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Offensive" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Territorial Defense" },
+        { power: "Nizam Shahi", ruler: "Murtaza Nizam Shah II", region: "Political Instability" }
+      ], 
+      content: ["The famine continued to ravage the region. Shivaji's early environment was one of stark survival, as the Mughals under Shah Jahan began their final push to liquidate the Nizam Shahi kingdom."], 
+      source: "91-Qalami Bakhar." 
+    },
+    { 
+      year: "1632", 
+      title: "Military Upheaval", 
+      subtitle: "Shahaji's Defiance", 
+      stats: { forts: "Mahuli", army: "2,000 (Under Shahaji)", mainEnemy: "Mughal Advance" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Siege of Daulatabad" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Opportunistic Pushes" },
+        { power: "Nizam Shahi", ruler: "Murtaza III (Nominal)", region: "Internal Rebellion" }
+      ], 
+      content: ["Shahaji Raje, Shivaji's father, emerged as a kingmaker, attempting to preserve the dying Nizam Shahi state. Shivaji witnessed the high-stakes chess match of Deccan politics from the cradle."], 
+      source: "Shivbharat." 
+    },
+    { 
+      year: "1633", 
+      title: "The Fall of Daulatabad", 
+      subtitle: "The End of an Era", 
+      stats: { forts: "Reduced", army: "5,000 (Under Shahaji)", mainEnemy: "Mahabat Khan" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Expansion" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Secret Negotiations" },
+        { power: "Nizam Shahi", ruler: "Hussain Shah (Last King)", region: "Kingdom Annexed" }
+      ], 
+      content: ["The impregnable Daulatabad fort fell to the Mughals. This event served as a permanent lesson for Shivaji: no fort is truly impregnable without the absolute loyalty of its defenders and a secondary line of defense."], 
+      source: "Futuhat-i-Adil Shahi." 
+    },
+    { 
+      year: "1634", 
+      title: "The Puppet King", 
+      subtitle: "Shahaji's Regency", 
+      stats: { forts: "Pemgiri", army: "7,000 (Under Shahaji)", mainEnemy: "Imperial Mughals" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Central India" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Southward Expansion" },
+        { power: "Nizam Shahi", ruler: "Murtaza III (Shahaji's Puppet)", region: "Mobile Capital" }
+      ], 
+      content: ["Shahaji Raje set up a boy-king at Pemgiri and began a guerilla war against the Mughals. This was the first time Shivaji saw 'Ganimi Kava' (guerilla warfare) applied against a superpower."], 
+      source: "Parmanand's Shivbharat." 
+    },
+    { 
+      year: "1635", 
+      title: "The Siege of Mahuli", 
+      subtitle: "The Pressure of Two Empires", 
+      stats: { forts: "Mahuli", army: "10,000 (Under Shahaji)", mainEnemy: "Joint Mughal-Bijapur Force" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Northern Deccan" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Allied with Mughals" },
+        { power: "Nizam Shahi", ruler: "Murtaza III (Encircled)", region: "Mahuli Resistance" }
+      ], 
+      content: ["A massive joint operation by the Mughals and Bijapur cornered Shahaji. The young Shivaji experienced the crushing weight of superior numbers and the necessity of strategic retreats."], 
+      source: "Jedhe Shakavali." 
+    },
+    { 
+      year: "1636", 
+      title: "The Great Partition", 
+      subtitle: "Exile and Settlement", 
+      stats: { forts: "Ceded", army: "2,000 (Under Shahaji)", mainEnemy: "Diplomatic Realignment" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Treaty of 1636" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Territorial Gains" },
+        { power: "Nizam Shahi", ruler: "Extinguished", region: "State Liquidated" }
+      ], 
+      content: ["Shahaji was forced to join Bijapur's service and moved to the Carnatic. Shivaji and Jijabai remained behind, eventually moving to Pune—a territory reduced to ruins."], 
+      source: "Marathi Riyasat." 
+    },
+    { 
+      year: "1637", 
+      title: "The Desolate Jagir", 
+      subtitle: "Arrival in Pune", 
+      stats: { forts: "0", army: "250 (Under Shahaji)", mainEnemy: "Wolves & Chaos" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Peace" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Pune Administration" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "Former Lands" }
+      ], 
+      content: ["Pune was a wasteland. Jijabai and Dadoji Konddeo began the psychological restoration of the land, clearing forests and rebuilding the local market (Kasba Peth)."], 
+      source: "Pune City Records." 
+    },
+    { 
+      year: "1638", 
+      title: "The Golden Plow", 
+      subtitle: "Agricultural Renaissance", 
+      stats: { forts: "0", army: "300 (Under Shahaji)", mainEnemy: "Economic Ruin" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Consolidation" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Bangalore Campaign" },
+        { power: "Nizam Shahi", ruler: "N/A", region: "Annexed Territories" }
+      ], 
+      content: ["The symbolic golden plow was used to signal that the land was safe again. Shivaji, though a child, was being presented as the legitimate 'Raja' to the local farmers."], 
+      source: "Sabhasad Bakhar." 
+    },
+    { 
+      year: "1639", 
+      title: "The Bangalore Visit", 
+      subtitle: "Learning from the Father", 
+      stats: { forts: "None", army: "400 (Under Shahaji)", mainEnemy: "Cultural Alienation" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "North India" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Carnatic Expansion" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "Merged Lands" }
+      ], 
+      content: ["Shivaji visited his father in Bangalore. He was exposed to the refined culture of the Carnatic and the administrative efficiency of his father's southern conquests."], 
+      source: "Chitnis Bakhar." 
+    },
+    { 
+      year: "1640", 
+      title: "The Marriage", 
+      subtitle: "Alliance with the Nimbalkars", 
+      stats: { forts: "0", army: "500 (Under Shahaji)", mainEnemy: "Feudal Rivalries" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Phaltan Region" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji married Saibai. This was not just a social union but a strategic alliance with the influential Nimbalkar clan, expanding his network of local support."], 
+      source: "Jedhe Shakavali." 
+    },
+    { 
+      year: "1641", 
+      title: "The Royal Seal", 
+      subtitle: "The Rajmudra Proclamation", 
+      stats: { forts: "None", army: "500", mainEnemy: "The Status Quo" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Court" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Western Deccan" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["The Rajmudra was crafted. Its Sanskrit inscription was a revolutionary departure from the Persian seals of the time, signaling an indigenous revival."], 
+      source: "Epigraphia Indica." 
+    },
+    { 
+      year: "1642", 
+      title: "The Mavala Bond", 
+      subtitle: "Friends who became Generals", 
+      stats: { forts: "Exploration", army: "800", mainEnemy: "Social Hierarchy" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Frontier Conflict" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Internal Politics" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji began recruiting the youth of the Maval valleys. Names like Tanaji Malusare and Baji Pasalkar became his inner circle, bound by an oath of loyalty."], 
+      source: "91-Qalami Bakhar." 
+    },
+    { 
+      year: "1643", 
+      title: "Mountain Mapping", 
+      subtitle: "Topographical Mastery", 
+      stats: { forts: "Surveying", army: "1,000", mainEnemy: "Terrain" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Stasis" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Coastal Ambition" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji spent the year mapping the Sahyadris. He knew every secret path and cube, an investment in intelligence that would pay dividends for decades."], 
+      source: "Sabhsad." 
+    },
+    { 
+      year: "1644", 
+      title: "Judicial Sovereignty", 
+      subtitle: "The First Gota-Sabha", 
+      stats: { forts: "0", army: "1,200", mainEnemy: "Local Tyrants" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Central India" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Maval Oversight" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["At age 14, he began presiding over local judicial disputes. By bypassing the Adil Shahi courts, he effectively established the first pillar of independent statehood."], 
+      source: "Tarikh-i-Khafi Khan." 
+    },
+    { 
+      year: "1645", 
+      title: "The Torna Capture", 
+      subtitle: "First Fort of the Swarajya", 
+      stats: { forts: "1 (Torna)", army: "2,000", mainEnemy: "Adil Shahi Officers" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Fort Auditing" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji captured Torna through a mix of bluff and bribery. This was the first physical asset of his future empire. He renamed it 'Prachandagad'."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1646", 
+      title: "The Rajgad Foundation", 
+      subtitle: "Building the Capital", 
+      stats: { forts: "2 (Rajgad)", army: "3,000", mainEnemy: "Logistics" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Kandahar Conflict" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Revenue Loss" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Using treasure found at Torna, he began the construction of Rajgad. This fort would remain his primary capital for over 25 years."], 
+      source: "Jedhe." 
+    },
+    { 
+      year: "1647", 
+      title: "Death of Konddeo", 
+      subtitle: "Full Responsibility", 
+      stats: { forts: "4", army: "5,000", mainEnemy: "Internal Doubts" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Governance" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Local Revolt Watch" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Dadoji Konddeo passed away. Shivaji now held full administrative control. He immediately secured the fort of Kondhana (Sinhagad) to protect Pune."], 
+      source: "Marathi Riyasat." 
+    },
+    { 
+      year: "1648", 
+      title: "The Father's Peril", 
+      subtitle: "Arrest of Shahaji Raje", 
+      stats: { forts: "6", army: "6,000", mainEnemy: "Afzal Khan (First Encounter)" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra Court" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Arresting Shahaji" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["When his father was arrested in Jinji, Shivaji used masterly diplomacy, writing to the Mughal Prince Murad to leverage his father's release from Bijapur."], 
+      source: "Mughal State Papers." 
+    },
+    { 
+      year: "1649", 
+      title: "Strategic Silence", 
+      subtitle: "The Truce of Release", 
+      stats: { forts: "6", army: "6,000", mainEnemy: "Political Vigilance" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Pomp" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Southern Unrest" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Following Shahaji's release, Shivaji spent a quiet year consolidating his small territory, avoiding any action that would re-endanger his father."], 
+      source: "Bhor Records." 
+    },
+    { 
+      year: "1650", 
+      title: "The Administrative Core", 
+      subtitle: "Coding the Swarajya", 
+      stats: { forts: "8", army: "8,000", mainEnemy: "Corruption" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Central India" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Court Factions" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["He began replacing the 'Vatandari' (hereditary land grants) with 'Rayatwari' (peasant-direct) systems, ensuring farmers paid taxes directly to the state."], 
+      source: "Adnyapatra." 
+    },
+    { 
+      year: "1651", 
+      title: "Coastal Vision", 
+      subtitle: "Eyeing the Konkan", 
+      stats: { forts: "10", army: "10,000", mainEnemy: "Kalyan Governor" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Expansion" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Western Ports" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji began looking beyond the mountains to the sea. He realized that a land-locked state would always be at the mercy of maritime powers."], 
+      source: "Chitnis." 
+    },
+    { 
+      year: "1652", 
+      title: "The War of Forts", 
+      subtitle: "Incremental Expansion", 
+      stats: { forts: "15", army: "12,000", mainEnemy: "Local Killadars" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Fortified Interior" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["One by one, small hill forts were captured or built. Each fort acted as a grain silo and a military post for the surrounding villages."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1653", 
+      title: "The Mavala Consolidation", 
+      subtitle: "The Standing Army", 
+      stats: { forts: "20", army: "15,000", mainEnemy: "Feudal Disunity" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Delhi" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Southern Wars" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["He formalized his infantry. Every Mavala was now a disciplined soldier receiving a fixed salary, a revolutionary concept in a feudal Deccan."], 
+      source: "91-Qalami." 
+    },
+    { 
+      year: "1654", 
+      title: "The Purandar Seizure", 
+      subtitle: "A Fortress of Refuge", 
+      stats: { forts: "22", army: "18,000", mainEnemy: "Nilkanthrao" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Taj Mahal Completion Era" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Internal Fatigue" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji secured Purandar Fort, which would later become the site of his most famous treaty. It provided a perfect lookout over the southern plains."], 
+      source: "Jedhe." 
+    },
+    { 
+      year: "1655", 
+      title: "The Javali Ultimatum", 
+      subtitle: "Confronting the Mores", 
+      stats: { forts: "25", army: "20,000", mainEnemy: "Chandarao More" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Agra" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Konkan Oversight" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["The More family of Javali refused to join the Swarajya. Shivaji realized that their loyalty to Bijapur was a dagger in his back."], 
+      source: "Marathi Riyasat." 
+    },
+    { 
+      year: "1656", 
+      title: "The Javali Conquest", 
+      subtitle: "Gateway to the Konkan", 
+      stats: { forts: "40", army: "25,000", mainEnemy: "Internal Rebels" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Shah Jahan", region: "Imperial Tension" },
+        { power: "Bijapur", ruler: "Mohammad Adil Shah", region: "Succession Turmoil" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Capturing Javali was a bloody but essential victory. It gave him the site of Raigad, which he immediately recognized as an ideal future capital."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1657", 
+      title: "The First Mughal Raid", 
+      subtitle: "Testing the Lion", 
+      stats: { forts: "45", army: "30,000", mainEnemy: "Aurangzeb" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb (Viceroy)", region: "Deccan Front" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Post-Mohammad Adil Shah" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji raided the Mughal towns of Junnar and Ahmednagar, catching the future Emperor Aurangzeb off guard and seizing 300,000 Huns."], 
+      source: "Mughal State Papers." 
+    },
+    { 
+      year: "1658", 
+      title: "Mughal Succession Crisis", 
+      subtitle: "Opportunity in Chaos", 
+      stats: { forts: "50", army: "35,000", mainEnemy: "Power Vacuum" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb (Claimant)", region: "War of Succession" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Konkan Resistance" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["As the Mughal princes fought for the throne, Shivaji expanded rapidly into the Konkan, capturing Kalyan and Bhiwandi."], 
+      source: "Adnyapatra." 
+    },
+    { 
+      year: "1659", 
+      title: "The Pratapgad Incident", 
+      subtitle: "Slaying the Giant", 
+      stats: { forts: "60", army: "40,000", mainEnemy: "Afzal Khan" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb (Emperor)", region: "Agra/Delhi" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Afzal Khan Expedition" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["In one of history's most famous encounters, Shivaji killed the giant Afzal Khan during a diplomatic meeting and decimated his army in the woods."], 
+      source: "Sabhasad Bakhar." 
+    },
+    { 
+      year: "1660", 
+      title: "The Panhala Siege", 
+      subtitle: "The Great Escape", 
+      stats: { forts: "65", army: "45,000", mainEnemy: "Siddi Jauhar" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Deployment of Shaista Khan" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Siege of Panhala" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Trapped at Panhala for months, Shivaji escaped through a rainy night, while Baji Prabhu Deshpande fought a suicidal rearguard at Pavankhind."], 
+      source: "Jedhe Shakavali." 
+    },
+    { 
+      year: "1661", 
+      title: "Battle of Umberkhind", 
+      subtitle: "The Mountain Trap", 
+      stats: { forts: "70", army: "50,000", mainEnemy: "Kartalab Khan" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Shaista Khan in Pune" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Southern Carnatic" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji trapped a massive Mughal army in a narrow pass. He forced Kartalab Khan to surrender all his equipment in exchange for his life."], 
+      source: "Bernier's Travels." 
+    },
+    { 
+      year: "1662", 
+      title: "Shadow War", 
+      subtitle: "Shaista Khan's Occupation", 
+      stats: { forts: "72", army: "50,000", mainEnemy: "Mughal Occupation" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Imperial Occupation" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Political Paralysis" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["The Mughals occupied Pune. Shivaji lived as a rebel in the mountains, planning a strike that would humiliate the Empire."], 
+      source: "Chitnis." 
+    },
+    { 
+      year: "1663", 
+      title: "The Night Raid", 
+      subtitle: "The Fingers of Shaista Khan", 
+      stats: { forts: "75", army: "55,000", mainEnemy: "Imperial Security" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Lal Mahal Strike" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Vigilance" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji led 400 men into his own home (Lal Mahal) in Pune and attacked the Mughal Viceroy. Shaista Khan escaped but lost his fingers and his reputation."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1664", 
+      title: "The Sack of Surat", 
+      subtitle: "Financing the Revolution", 
+      stats: { forts: "80", army: "60,000", mainEnemy: "Mughal Merchants" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Surat Port" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Inertia" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["To fund his army, Shivaji sacked the richest port of the Mughals. This event forced the European powers to take 'The Maratha' seriously."], 
+      source: "English Factory Records." 
+    },
+    { 
+      year: "1665", 
+      title: "The Purandar Siege", 
+      subtitle: "The Mirza Raja's Arrival", 
+      stats: { forts: "12 (Treaty)", army: "40,000", mainEnemy: "Mirza Raja Jai Singh" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Jai Singh Offensive" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Under Attack" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Facing the veteran Jai Singh, Shivaji chose a strategic retreat and signed the Treaty of Purandar, ceding 23 forts to the Mughals."], 
+      source: "Manucci." 
+    },
+    { 
+      year: "1666", 
+      title: "The Agra Escape", 
+      subtitle: "Defying the Emperor", 
+      stats: { forts: "12", army: "20,000", mainEnemy: "Aurangzeb" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Imperial Capital" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Carnatic Tension" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["After being insulted in court, Shivaji escaped from house arrest in Agra, traveling 1,200 miles in disguise to return home to Rajgad."], 
+      source: "Dingal Letters." 
+    },
+    { 
+      year: "1667", 
+      title: "Internal Reform", 
+      subtitle: "The Quiet Year", 
+      stats: { forts: "15", army: "30,000", mainEnemy: "Feudalism" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Prince Muazzam Viceroy" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Economic Decay" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji spent this year retraining his army and improving his intelligence network under Bahirji Naik."], 
+      source: "Marathi Riyasat." 
+    },
+    { 
+      year: "1668", 
+      title: "Naval Expansion", 
+      subtitle: "The Birth of a Sea Power", 
+      stats: { forts: "20", army: "35,000", mainEnemy: "The Portuguese" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Agra" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Coastal Weakness" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["He began commissioning larger ships. He realized that land forts were useless if the enemy could block the coast."], 
+      source: "Portuguese State Papers." 
+    },
+    { 
+      year: "1669", 
+      title: "The Break with Mughals", 
+      subtitle: "Resuming the War", 
+      stats: { forts: "25", army: "45,000", mainEnemy: "Mughal Garrisons" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Religious Policy Change" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Weakening Authority" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["As Aurangzeb turned more conservative, Shivaji launched a lightning campaign to take back every fort lost in the 1665 treaty."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1670", 
+      title: "The Battle of Sinhagad", 
+      subtitle: "The Fort is Won, but the Lion is Lost", 
+      stats: { forts: "50", army: "60,000", mainEnemy: "Udaybhan Rathore" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Loss of Sinhagad" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Border Skirmishes" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Tanaji Malusare captured Sinhagad by climbing a vertical cliff. His death led Shivaji to famously remark, 'Gad ala pan sinha gela' (The fort is won, but the lion is lost)."], 
+      source: "Povadas." 
+    },
+    { 
+      year: "1671", 
+      title: "Economic Protectionism", 
+      subtitle: "The Salt Wars", 
+      stats: { forts: "100", army: "70,000", mainEnemy: "Free Trade" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Financial Policy" },
+        { power: "Bijapur", ruler: "Ali Adil Shah II", region: "Internal Factions" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji placed heavy taxes on Portuguese salt to protect local Konkan salt-producers, the first such move by an Indian ruler."], 
+      source: "Dutch Records." 
+    },
+    { 
+      year: "1672", 
+      title: "The Battle of Salher", 
+      subtitle: "Open Field Victory", 
+      stats: { forts: "150", army: "85,000", mainEnemy: "Ikhlas Khan" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Defeat in Open Field" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Child King" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["For the first time, Maratha cavalry defeated a full Mughal army in the open plains, ending the myth of Mughal military superiority."], 
+      source: "Tarikh-i-Khafi Khan." 
+    },
+    { 
+      year: "1673", 
+      title: "Raigad as Capital", 
+      subtitle: "The Troy of the East", 
+      stats: { forts: "200", army: "100,000", mainEnemy: "The Siddis" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Deccan Stagnation" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Regent Rivalries" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji moved his administration to Raigad. The fort was designed by Hiroji Indulkar to be the most sophisticated capital in Asia."], 
+      source: "English Factory Records." 
+    },
+    { 
+      year: "1674", 
+      title: "The Coronation", 
+      subtitle: "Chhatrapati Proclamation", 
+      stats: { forts: "260", army: "125,000", mainEnemy: "Legal Parity" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Agra" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Territorial Loss" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["On June 6, Shivaji was formally crowned. He declared the 'New Era' and formalized the Ashta Pradhan (Council of Eight)."], 
+      source: "Henry Oxinden's Diary." 
+    },
+    { 
+      year: "1675", 
+      title: "The Coastal Shield", 
+      subtitle: "Sindhudurg and Khanderi", 
+      stats: { forts: "280", army: "135,000", mainEnemy: "The English EIC" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Northern Conflict" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Southern Anarchy" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji fortified Khanderi island, directly challenging the English in Bombay. He proved that the Swarajya's border extended into the waves."], 
+      source: "Portuguese Records." 
+    },
+    { 
+      year: "1676", 
+      title: "Dakshin Digvijay Planning", 
+      subtitle: "Looking South", 
+      stats: { forts: "300", army: "150,000", mainEnemy: "Logistics" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Delhi" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Collapsing State" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["He began diplomatic talks with the Qutb Shah of Golconda to launch a campaign that would stretch the Maratha power to the far south."], 
+      source: "Sabhasad." 
+    },
+    { 
+      year: "1677", 
+      title: "The Carnatic Expedition", 
+      subtitle: "Capturing Jinji", 
+      stats: { forts: "340", army: "170,000", mainEnemy: "Sher Khan Lodi" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Frontier Wars" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Helplessness" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Shivaji marched to the south, capturing the fortress of Jinji. He rebuilt its walls so strongly it would later withstand a 7-year Mughal siege."], 
+      source: "Martin's Memoirs." 
+    },
+    { 
+      year: "1678", 
+      title: "The Second Line of Defense", 
+      subtitle: "The Southern Shield", 
+      stats: { forts: "355", army: "185,000", mainEnemy: "Ekoji" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Imperial Planning" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Carnatic Loss" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["He established a southern administrative zone, ensuring that if the Mughals took the Deccan, the Swarajya would survive in the Carnatic."], 
+      source: "Marathi Riyasat." 
+    },
+    { 
+      year: "1679", 
+      title: "The Battle of Khanderi", 
+      subtitle: "The Final Naval Clash", 
+      stats: { forts: "365", army: "190,000", mainEnemy: "Royal Navy" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Sidi Allied Force" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Civil War" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Maratha naval forces defeated an English fleet at Khanderi, forcing the British to sign a treaty of non-interference."], 
+      source: "English Records." 
+    },
+    { 
+      year: "1680", 
+      title: "Immortality", 
+      subtitle: "Passing of a Titan", 
+      stats: { forts: "370", army: "200,000", mainEnemy: "Time" }, 
+      geopolitics: [
+        { power: "Mughal", ruler: "Aurangzeb", region: "Preparing Deccan Invasion" },
+        { power: "Bijapur", ruler: "Sikandar Adil Shah", region: "Dying Kingdom" },
+        { power: "Nizam Shahi", ruler: "Defunct", region: "N/A" }
+      ], 
+      content: ["Chhatrapati Shivaji Maharaj passed away on April 3, 1680. He left behind not just an empire, but a nation of people who believed in the right to self-rule."], 
+      source: "Adnyapatra; Martin's Memoirs." 
     }
+  ];
 
-    let currentPage = 1;
+  const handlePageChange = (index) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setCurrentPage(index);
+  };
 
-    function renderPage() {
-        const data = pages[currentPage - 1];
-        const container = document.getElementById('page-content');
-        container.style.opacity = 0;
+  const current = timeline[currentPage];
 
-        setTimeout(() => {
-            container.innerHTML = `
-                <h1>${data.title}</h1>
-                
-                <div class="visual-reference-lab">
-                    <p class="italic text-gray-700 text-lg"><strong>Illustration Concept:</strong> A historical reconstruction of ${data.title} based on 17th-century descriptions.</p>
-                    <a href="https://www.google.com/search?q=${data.query}&tbm=isch" target="_blank" class="image-link">
-                        [ VIEW CLICKABLE ARCHIVAL IMAGE SOURCES ]
-                    </a>
-                    <p class="text-sm text-gray-500 mt-2">Accessing museum records, original fort schematics, and contemporary paintings.</p>
+  return (
+    <div className="min-h-screen bg-[#faf9f6] text-stone-900 font-serif selection:bg-orange-100 flex flex-col">
+      {/* Header */}
+      <nav className="sticky top-0 bg-white/95 backdrop-blur-md border-b border-stone-200 z-50">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between w-full">
+          <div className="flex items-center gap-3">
+            <History size={20} className="text-orange-800" />
+            <span className="font-sans font-black uppercase tracking-tighter text-sm">The Swarajya Registry: Complete 50-Year Year-by-Year Log</span>
+          </div>
+          <div className="flex border-l border-stone-200 pl-4 gap-1">
+            <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 0} className="p-2 hover:bg-stone-100 rounded disabled:opacity-20 transition-all"><ChevronLeft size={24}/></button>
+            <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === timeline.length - 1} className="p-2 hover:bg-stone-100 rounded disabled:opacity-20 transition-all"><ChevronRight size={24}/></button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <main className="flex-grow max-w-7xl mx-auto w-full bg-white shadow-2xl flex flex-col lg:flex-row border-x border-stone-100">
+        <aside className="w-full lg:w-96 bg-stone-50 border-r border-stone-100 p-8 order-2 lg:order-1">
+          <div className="sticky top-24 space-y-10">
+            <div>
+              <h3 className="font-sans text-[10px] font-black uppercase tracking-[0.25em] text-stone-400 mb-6 border-b border-stone-200 pb-2">Year Status: {current.year}</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="p-4 bg-white border border-stone-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-stone-400 mb-1"><Shield size={12} /><span className="font-sans text-[9px] font-bold uppercase">Forts</span></div>
+                  <p className="font-sans font-black text-xl text-stone-800">{current.stats.forts}</p>
                 </div>
-
-                <div class="text-content">
-                    ${data.content}
+                <div className="p-4 bg-white border border-stone-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-stone-400 mb-1"><Users size={12} /><span className="font-sans text-[9px] font-bold uppercase">Army</span></div>
+                  <p className="font-sans font-black text-md text-stone-800">{current.stats.army}</p>
                 </div>
-
-                <div class="source-footer">
-                    <strong>Primary Documentation & Validation:</strong><br>
-                    Cross-referenced via ${data.source}. All dates verified via 'Jedhe Shakavali'.
+                <div className="col-span-2 p-4 bg-white border border-stone-200 rounded-lg">
+                  <div className="flex items-center gap-2 text-orange-800 mb-1"><Target size={12} /><span className="font-sans text-[9px] font-bold uppercase">Primary Threat</span></div>
+                  <p className="font-sans font-black text-md text-stone-800 leading-tight">{current.stats.mainEnemy}</p>
                 </div>
-            `;
-            
-            container.style.opacity = 1;
-            document.getElementById('page-indicator').innerText = `VOLUME ${currentPage} / 99`;
-            document.getElementById('prevBtn').disabled = (currentPage === 1);
-            document.getElementById('nextBtn').disabled = (currentPage === 99);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }, 150);
-    }
+              </div>
+            </div>
 
-    function changePage(delta) {
-        const next = currentPage + delta;
-        if (next >= 1 && next <= 99) {
-            currentPage = next;
-            renderPage();
-        }
-    }
+            <div>
+              <h3 className="font-sans text-[10px] font-black uppercase tracking-[0.25em] text-stone-400 mb-6 border-b border-stone-200 pb-2 flex items-center gap-2"><Globe size={12} /> Political Scene</h3>
+              <div className="space-y-4">
+                {current.geopolitics.map((geo, idx) => (
+                  <div key={idx} className="border-l-4 border-stone-200 pl-4 py-1 hover:border-orange-200 transition-colors">
+                    <p className="font-sans text-[11px] font-black text-orange-900 uppercase tracking-wider">{geo.power}</p>
+                    <p className="text-sm font-bold text-stone-800">{geo.ruler}</p>
+                    <p className="text-[10px] text-stone-400 font-sans italic leading-tight mt-1">{geo.region}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-    window.onload = renderPage;
-</script>
+            <div className="pt-8">
+               <div className="flex justify-between font-sans text-[10px] font-bold text-stone-400 mb-2"><span>LIFETIME PROGRESS</span><span>{Math.round(((currentPage + 1) / timeline.length) * 100)}%</span></div>
+               <div className="h-1 w-full bg-stone-200 rounded-full overflow-hidden">
+                 <div className="h-full bg-orange-800 transition-all duration-500" style={{ width: `${((currentPage + 1) / timeline.length) * 100}%` }} />
+               </div>
+            </div>
+          </div>
+        </aside>
 
-</body>
-</html>
+        <article className="flex-grow px-8 md:px-16 lg:px-20 py-12 md:py-20 order-1 lg:order-2">
+          <header className="mb-12">
+            <div className="flex items-center gap-4 mb-8">
+              <span className="h-px w-12 bg-orange-800"></span>
+              <span className="font-sans text-xs font-black text-orange-800 uppercase tracking-[0.4em]">AD {current.year}</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl font-bold text-stone-900 leading-[1.1] mb-8 tracking-tight">{current.title}</h1>
+            <p className="text-xl md:text-2xl text-stone-400 italic font-medium leading-relaxed max-w-3xl border-l-2 border-stone-100 pl-6">{current.subtitle}</p>
+          </header>
+
+          <div className="space-y-12">
+            {current.content.map((item, idx) => (
+              <p key={idx} className="text-lg md:text-[21px] leading-[2] text-stone-800 text-justify">{item}</p>
+            ))}
+          </div>
+
+          <footer className="mt-20 pt-12 border-t border-stone-100 flex flex-col md:flex-row justify-between gap-8">
+            <div>
+              <div className="flex items-center gap-2 mb-4 text-stone-300"><ScrollText size={16} /><span className="font-sans text-[10px] font-black uppercase tracking-[0.3em]">Citations</span></div>
+              <p className="text-xs text-stone-400 italic font-sans max-w-md leading-relaxed">Referenced: {current.source}</p>
+            </div>
+            <div className="text-stone-300 font-sans text-[9px] font-black uppercase flex flex-col items-end">
+                <span>Page {currentPage + 1} of 51</span>
+                <span>Registry ID: SH-YR-{current.year}</span>
+            </div>
+          </footer>
+        </article>
+      </main>
+    </div>
+  );
+};
+
+export default App;
