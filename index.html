@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chhatrapati Shivaji Maharaj: The 51-Year Definitive Archive</title>
+    <title>Chhatrapati Shivaji Maharaj: The 52-Page Definitive Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
@@ -101,20 +101,20 @@
         <h1 class="text-5xl md:text-7xl font-bold serif tracking-tighter text-amber-500 mb-4 drop-shadow-lg">
             SHIVAJI MAHARAJ
         </h1>
-        <p class="text-amber-200/60 tracking-[0.3em] uppercase text-xs font-semibold">The Complete 51-Year Scholarly Record (1630–1680)</p>
+        <p class="text-amber-200/60 tracking-[0.3em] uppercase text-xs font-semibold">The Complete 52-Part Scholarly Record (Background & 1630–1680)</p>
         
         <div class="mt-10 flex flex-col items-center">
             <div class="w-full max-w-lg progress-bar rounded-full overflow-hidden">
                 <div id="progressBar" class="progress-fill" style="width: 0%"></div>
             </div>
             <div class="mt-4 w-full max-w-lg flex justify-between items-center text-[10px] uppercase tracking-widest text-slate-500 font-bold">
-                <span id="pageCounter">Archive 01 / 51</span>
+                <span id="pageCounter">Archive 01 / 52</span>
                 <div class="flex items-center gap-2">
-                    <span>Year Selector:</span>
+                    <span>Jump to:</span>
                     <select id="jumpToYear" onchange="jumpTo(this.value)" class="jump-select rounded px-2 py-1 text-[10px]">
                     </select>
                 </div>
-                <span id="yearMarker">1630 A.D.</span>
+                <span id="yearMarker">Prologue</span>
             </div>
         </div>
     </header>
@@ -128,10 +128,10 @@
             <div class="flex flex-col sm:flex-row justify-between items-center mt-12 pt-8 border-t border-white/5 gap-6">
                 <button onclick="prevPage()" id="prevBtn" class="btn-nav w-full sm:w-auto px-10 py-4 rounded-full flex items-center justify-center gap-3 font-bold text-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-                    PREVIOUS YEAR
+                    PREVIOUS
                 </button>
                 <button onclick="nextPage()" id="nextBtn" class="btn-nav w-full sm:w-auto px-10 py-4 rounded-full flex items-center justify-center gap-3 font-bold text-sm">
-                    NEXT YEAR
+                    NEXT
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                 </button>
             </div>
@@ -141,6 +141,14 @@
 
 <script>
     const biographyData = [
+        {
+            year: "Prologue",
+            title: "The Dawn of Conflict",
+            details: "The early 17th century in the Deccan was defined by the decaying Nizam Shahi dynasty of Ahmadnagar and the aggressive southward expansion of the Mughal Empire under Shah Jahan. The region was a mosaic of warring Sultanates—Bijapur, Golconda, and Ahmadnagar—who frequently employed Maratha chieftains as mercenary commanders.",
+            extended: "Shivaji’s father, Shahaji Raje Bhonsle, was a high-ranking military commander whose loyalty was coveted by all. His mother, Jijabai, was the daughter of Lakhuji Jadhavrao of Sindkhed, a powerful nobleman. The marriage unified two prestigious Maratha houses, but the era was marred by treachery; Jijabai’s father and brothers were murdered in the Nizam Shahi court, fueling her desire for a sovereign Hindu state (Swarajya) free from Sultanate politics.",
+            analysis: "The 'Bargi' warfare system (light cavalry) perfected by Shahaji Raje laid the tactical foundation for his son. This period of political instability forced Maratha families to choose between being vassals to foreign Sultans or carving out their own destiny. Shivaji was the answer to this historical dilemma.",
+            source: "Source: Historical background from 'The Rise of Maratha Power' and 'Shivacharitra'."
+        },
         {
             year: 1630,
             title: "Birth of a Visionary",
@@ -557,7 +565,7 @@
     biographyData.forEach((item, index) => {
         const option = document.createElement('option');
         option.value = index;
-        option.textContent = `${item.year} - ${item.title}`;
+        option.textContent = item.year === "Prologue" ? "Prologue: Background" : `${item.year} - ${item.title}`;
         select.appendChild(option);
     });
 
@@ -573,7 +581,7 @@
         container.innerHTML = `
             <div class="animate-page flex flex-col h-full">
                 <div class="flex flex-col md:flex-row md:items-center gap-6 mb-10">
-                    <div class="year-badge text-white font-bold w-24 h-24 shrink-0 rounded-[2rem] flex items-center justify-center text-3xl serif shadow-2xl border border-amber-400/30">
+                    <div class="year-badge text-white font-bold w-24 h-24 shrink-0 rounded-[2rem] flex items-center justify-center text-xl md:text-2xl serif shadow-2xl border border-amber-400/30 text-center px-2">
                         ${data.year}
                     </div>
                     <div>
@@ -584,21 +592,21 @@
 
                 <div class="space-y-8 flex-grow">
                     <section>
-                        <h3 class="text-amber-500/80 text-xs font-black uppercase tracking-[0.2em] mb-3">Core Narrative</h3>
+                        <h3 class="text-amber-500/80 text-xs font-black uppercase tracking-[0.2em] mb-3">Historical Context</h3>
                         <p class="text-slate-100 text-2xl leading-relaxed serif font-medium">
                             ${data.details}
                         </p>
                     </section>
                     
                     <section>
-                        <h3 class="text-amber-500/80 text-xs font-black uppercase tracking-[0.2em] mb-3">Extended Context</h3>
+                        <h3 class="text-amber-500/80 text-xs font-black uppercase tracking-[0.2em] mb-3">Extended Narrative</h3>
                         <p class="text-slate-400 text-xl leading-relaxed italic serif">
                             ${data.extended}
                         </p>
                     </section>
 
                     <div class="analysis-box">
-                        <h3 class="text-amber-500 text-xs font-black uppercase tracking-[0.2em] mb-3">Strategic Analysis</h3>
+                        <h3 class="text-amber-500 text-xs font-black uppercase tracking-[0.2em] mb-3">Strategic Insight</h3>
                         <p class="text-slate-300 text-base leading-relaxed">
                             ${data.analysis}
                         </p>
@@ -619,19 +627,19 @@
             </div>
         `;
 
-        document.getElementById('progressBar').style.width = `${((currentPage + 1) / 51) * 100}%`;
-        document.getElementById('pageCounter').innerText = `Archive ${String(currentPage + 1).padStart(2, '0')} / 51`;
-        document.getElementById('yearMarker').innerText = `${data.year} A.D.`;
+        document.getElementById('progressBar').style.width = `${((currentPage + 1) / biographyData.length) * 100}%`;
+        document.getElementById('pageCounter').innerText = `Archive ${String(currentPage + 1).padStart(2, '0')} / ${biographyData.length}`;
+        document.getElementById('yearMarker').innerText = data.year === "Prologue" ? "Prologue" : `${data.year} A.D.`;
         document.getElementById('jumpToYear').value = currentPage;
         
         document.getElementById('prevBtn').disabled = currentPage === 0;
-        document.getElementById('nextBtn').disabled = currentPage === 50;
+        document.getElementById('nextBtn').disabled = currentPage === (biographyData.length - 1);
 
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function nextPage() {
-        if (currentPage < 50) {
+        if (currentPage < (biographyData.length - 1)) {
             currentPage++;
             renderPage();
         }
